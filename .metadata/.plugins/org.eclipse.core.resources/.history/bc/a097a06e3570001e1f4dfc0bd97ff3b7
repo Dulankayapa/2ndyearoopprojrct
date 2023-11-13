@@ -1,0 +1,65 @@
+package userfeedback;
+
+public class feedback {
+	
+	private String name;
+	private String event;
+	private String feedback;
+	private String rating;
+	
+	public feedback(String name, String event, String feedback, String rating) {
+		
+		this.name = name;
+		this.event = event;
+		this.feedback = feedback;
+		this.rating = rating;
+	}
+
+	
+	public String getName() {
+		return name;
+	}
+
+
+
+	public String getEvent() {
+		return event;
+	}
+
+	
+	public String getFeedback() {
+		return feedback;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public void setEvent(String event) {
+		this.event = event;
+	}
+
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+
+	public String getRating() {
+		return rating;
+	}
+
+	
+	
+	
+
+}
+

@@ -1,0 +1,98 @@
+package userfeedback;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+public class FeedbackDButil {
+	
+	private static Connection con=null;
+	private static Statement stmt = null;
+	private static ResultSet rs = null;
+	private static boolean isSuccess;
+	
+	public static boolean insertfeedback(String name,String event,String feedback,String rating) {
+		
+		boolean isSuccess = false;
+		
+		try {
+			//create database connection
+			con = ConnectionDB.getConnection();
+			stmt = con.createStatement();
+			
+			String sql = "insert into userfeedback values(0,'"+name+"','"+ event+"','"+feedback+"','"+rating+"')";
+			int rs = stmt.executeUpdate(sql);
+			
+			if(rs>0) {
+				isSuccess =true;
+			}
+			else {
+				isSuccess = false;
+			}
+
+			
+		} catch ( Exception e) {
+			System.out.println(e);
+		
+		}
+		return isSuccess;
+		
+	}
+	
+	
+	public static boolean updatefeedback(String name, String event, String feedback, String rating) {
+
+		try {
+
+			con = ConnectionDB.getConnection();
+			stmt = con.createStatement();
+
+			String sql = "UPDATE userfeedback set name = '"+name+"', event = '"+event+"', feedback = '"+feedback+"', rating = '"+rating+"' Where id = '"+id+"'";
+
+			int rs = stmt.executeUpdate(sql);
+
+			if (rs > 0) {
+
+				isSuccess = true;
+
+			} else {
+				isSuccess = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isSuccess;
+
+	}
+	
+	//create a method to delete data into DB
+
+		public static boolean deletefeedback(String name) {
+
+			try {
+				// create database connection
+				Connection con = ConnectionDB.getConnection();
+				Statement stmt = con.createStatement();
+				String sql = "delete from userfeedback  where name = '" + name + "'";
+				int rs = stmt.executeUpdate(sql);
+
+				if (rs > 0) {
+					isSuccess = true;
+				} else {
+					isSuccess = false;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return isSuccess;
+		}
+
+
+}

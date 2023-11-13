@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+</head>
+<body>
+
+	<form action="insert" method="post">
+
+		
+		<c:set value="${cus.Name}" />
+		<c:set value="${cus.Email}" />
+		<c:set value="${cus.Phone}" />
+		<c:set value="${cus.UserName}" />
+		
+
+		<h1>Register</h1>
+		Name:<input type="text" name="Name" value="${Name}"readonly><br> Email:<input
+			type="text" name="Email" value="${Email}" readonly ><br> Phone:<input
+			type="text" name="Phone" readonly><br> UserName:<input
+			type="text" name="UserName" readonly><br> 
+
+	</form>
+
+</body>
+</html>
+
+
+

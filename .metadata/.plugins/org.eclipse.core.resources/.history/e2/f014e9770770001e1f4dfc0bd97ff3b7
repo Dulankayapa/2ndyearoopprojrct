@@ -1,0 +1,43 @@
+package userfeedback;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/fbupdateserverlet")
+public class fbupdateserverlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		String name = request.getParameter("name");
+		String event = request.getParameter("event");
+		String feedback = request.getParameter("feedback");
+		String rating = request.getParameter("rating");
+
+		boolean isTrue;
+
+		isTrue = FeedbackDButil.updatefeedback(name, event, feedback, rating);
+
+		request.setAttribute("name", name);
+		request.setAttribute("event", event);
+		request.setAttribute("feedback", feedback);
+		request.setAttribute("rating", rating);
+
+		if (isTrue == true) {
+			RequestDispatcher dis = request.getRequestDispatcher("Success.jsp");
+			dis.forward(request, response);
+
+		} else {
+			RequestDispatcher dis = request.getRequestDispatcher("unsuccess.jsp");
+			dis.forward(request, response);
+		}
+	}
+}

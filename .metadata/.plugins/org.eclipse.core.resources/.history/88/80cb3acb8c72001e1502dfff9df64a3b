@@ -1,0 +1,81 @@
+package userfeedback;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CustomerDBUtil {
+	public static List<Customer> validate(String UserName,String Password){
+		
+		ArrayList<Customer> cus = new ArrayList<>();
+		
+		String url = "jdbc:mysql://localhost:3306/eventmanagementsystem";
+		String user = "root";
+		String pass = "password1234";
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			Connection con = DriverManager.getConnection(url, user, pass);
+			Statement stmt = con.createStatement();
+			
+			String sql = "select * from register where username = '"+UserName+"' and password = '"+Password+"'";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				int id = rs.getInt(1);
+				String name = rs.getString(2);
+				String email = rs.getString(3);
+				String phone = rs.getString(4);
+				String userU = rs.getString(5);
+				String passU = rs.getString(6);
+				
+				Customer c = new Customer(id,name,email,phone,userU,passU);
+				cus.add(c);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		
+		return cus;
+	}
+	
+	public static boolean updateCustomer(String username,String password) {
+
+	    boolean isSuccess = false;
+
+		String url = "jdbc:mysql://localhost:3306/eventmanagementsystem";
+		String user = "root";
+		String pass = "password1234";
+
+	    try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection(url, user, pass);
+            Statement stmt = con.createStatement();
+
+            String sql = "UPDATE register SET password = '" + password + "' WHERE username = '" + username + "'";
+
+            int rs = stmt.executeUpdate(sql);
+
+            if (rs > 0) {
+                isSuccess = true;
+            } else {
+                isSuccess = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return isSuccess;
+    }
+
+}

@@ -1,0 +1,245 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feedback Form</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Times New Roman", serif;
+	background-image: linear-gradient(to bottom, #45d3c5, rgb(66, 161, 183));
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100vw;
+}
+
+/*header*/
+.header {
+	padding: 10px 15px;
+	width: 100%;
+	font-size: 50px;
+	height: 170px;
+	justify-content: center;
+	background-repeat: no-repeat;
+	display: flex;
+	align-items: center;
+	color: #f5f5f5;
+	text-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px
+		#919191, 1px 4px 1px #919191, 1px 5px 1px #919191, 1px 6px 1px #919191,
+		1px 7px 1px #919191, 1px 8px 1px #919191, 1px 9px 1px #919191, 1px
+		10px 1px #919191, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px
+		rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2), 1px 30px
+		60px rgba(16, 16, 16, 0.4);
+	display: flex;
+	display: flex;
+	align-items: center;
+	background-repeat: no-repeat;
+}
+
+.imge {
+	padding: 5px 5px;
+	border-radius: 50%;
+	margin-left: 30px;
+	margin-right: 50px;
+}
+
+/* navigation bar */
+.topnav {
+	overflow: hidden;
+	background-color: white;
+	height: 50px;
+	list-style-type: none;
+	margin: 0px;
+	width: 100%;
+}
+/*  topnav links style */
+.topnav a {
+	float: right;
+	display: block;
+	color: #011719;
+	text-align: center;
+	text-decoration: none;
+	padding: 14px 18px;
+	margin: 5px 20px;
+	font-size: 15px;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+	background-color: #072326;
+	color: white;
+}
+
+/* topic styel*/
+h1 {
+	font-family: Times New Roman;
+	font-weight: bolder;
+	font-size: 45px;
+	padding-top: 50px;
+	padding-left: 30px;
+	margin-left: 20px;
+	text-align: left;
+	text-transform: capitalize;
+	color: #f5f5f5;
+	text-align: left;
+}
+
+.maincon {
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	max-width: 500px;
+	margin-top: 50px;
+	padding: 25px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	font-size: 25px;
+	height: 670px;
+}
+
+label, input, textarea {
+	display: flex;
+	margin-bottom: 10px;
+	width: 450px;
+	padding-top: 3px;
+	border-radius: 10px;
+}
+
+input {
+	height: 50px;
+	padding: 10px;
+}
+
+input, textarea {
+	padding: 10px;
+}
+
+label {
+	padding-bottom: 3px;
+}
+
+button {
+	background-color: #12467e;
+	color: #ffffff;
+	border: none;
+	padding: 15px 20px;
+	border-radius: 5px;
+	cursor: default;
+	text-align: center !important;
+	margin-top: 25px;
+}
+
+button:hover {
+	background-color: #0d2f5a;
+}
+
+/* Style the footer */
+footer {
+	height: 170px;
+	padding: 10px;
+	text-align: center;
+	color: white;
+	background-color: #777;
+	margin-top: 30px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+footer img {
+	border-radius: 50%;
+}
+
+footer p {
+	font-size: 20px;
+	margin-bottom: 30px;
+}
+
+.footcon {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	justify-items: center;
+}
+
+.imgbox {
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+}
+</style>
+</head>
+<body>
+
+
+	<%
+	String name = request.getParameter("name");
+	String event = request.getParameter("event");
+	String feedback = request.getParameter("feedback");
+	String rating = request.getParameter("rating");
+	%>
+	<div class="header">
+		<img class="imge" src="logo1.png" width="100px" height="100px">
+		<h2>Dreamscape</h2>
+	</div>
+	<div class="topnav">
+		<a href="#">Link</a> <a href="#">Link</a> <a href="#">Link</a> <a
+			href="#">Link</a> <a href="#">Link</a>
+	</div>
+
+	<div class="maincon">
+		<div class="container">
+
+			<p
+				style="text-align: center; color: blue; font-size: 35px; text-shadow: 2px 1px 1px #060606">Feedback
+				Form</p>
+
+					<form action="fbupdateserverlet" method="post">
+
+				<label for="name">Name:</label> <input type="text"
+					value="<%=name%>" id="name" name="name" required /> <label
+					for="event">Event:</label> <input type="text" value="<%=event%>"
+					id="event" name="event" required /> <label for="message">Feedback:</label>
+
+				<input type="text" style="height: 100px;"
+					value="<%=feedback%> name=" feedback" required /> <label
+					for="rating">Rating:(1-5)</label> <input type="text"
+					value="<%=rating%> id=" rating"
+					name="rating" required />
+
+				<div style="display: flex; justify-content: center">
+					<button type="submit" style="margin-right: 20px">update</button>
+
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div>
+		<footer>
+			<h2>
+				D r e a m s c a p e <br />--------------------
+			</h2>
+
+			<p>we here to make your dreams come true.</p>
+			<div class="footcon">
+				<img class="image" src="mail.jpg" width="60px" height="60px" />
+				<h3>dreamscap223@gmail.com</h3>
+				<img class="image" src="inster.jpg" width="60px" height="60px" />
+				<h3>Dreamscape</h3>
+				<img class="image" src="fb.png" width="60px" height="60px" />
+				<h3>Dreamscape</h3>
+			</div>
+		</footer>
+		�
+	</div>
+</body>
+</html>

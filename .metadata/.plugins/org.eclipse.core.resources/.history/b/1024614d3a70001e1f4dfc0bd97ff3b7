@@ -1,0 +1,64 @@
+package userfeedback;
+
+import java.io.IOException;
+
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/fbservlet")
+public class fbservlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+       
+	
+		
+// Get form data
+		String name = request.getParameter("name");
+		String event = request.getParameter("event");
+		String feedback = request.getParameter("feedback");
+		String rating = request.getParameter("rating");
+		
+		boolean isTrue;
+		int id = FeedbackDButil.insertfeedback(name, event, feedback, rating);
+		
+		//getting the data
+		request.setAttribute("name", name);
+		request.setAttribute("event", event);
+		request.setAttribute("feedback", feedback);
+		request.setAttribute("rating", rating);
+		
+		
+
+		if(id>0) {
+			RequestDispatcher dis =request.getRequestDispatcher("Success.jsp?id="+id);
+			dis.forward(request,response);
+		}
+		{
+		RequestDispatcher dis2 =request.getRequestDispatcher("unsuccess.jsp");
+			dis2.forward(request,response);
+		}
+	}
+		
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		
+		feedback f = new feedback();
+		int ID = f.getId();
+		List<feedback> feedbackdetails = FeedbackDButil.getfeedback(ID);
+		request.setAttribute("feedbackdetails", feedbackdetails);
+
+	}
+}

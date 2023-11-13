@@ -1,0 +1,10 @@
+package userfeedback;
+
+public class feedback {
+	private String id;
+	private String name;
+	private String event;
+	private String feedback;
+	private String rating;
+	
+}

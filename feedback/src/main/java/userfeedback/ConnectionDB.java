@@ -1,0 +1,30 @@
+package userfeedback;
+
+import java.sql.DriverManager;
+
+import java.sql.Connection;
+
+
+public class ConnectionDB {
+
+	private static String url = "jdbc:mysql://localhost:3306/eventmanagementsystem";
+	private static String userName = "root";
+	private static String password = "password1234";
+	
+	private static Connection con;
+	
+	public static Connection getConnection() {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			con =DriverManager.getConnection(url,userName,password);
+			
+		}catch (Exception e) {
+			System.out.println("e");
+			
+		}
+		return con;
+		
+	}
+}
